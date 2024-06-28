@@ -16,14 +16,27 @@ vehicles = [2, 3, 4, 5]
 cam = 0
 
 #cap = cv2.VideoCapture('./centro2.mp4')
-cap = cv2.VideoCapture(0)
+cap0 = cv2.VideoCapture(0)
+cap1 = cv2.VideoCapture(2)
+contFrame = 0
 
 
 # read frames
 ret = True
 while ret:
+    print(f'contador frames: {contFrame}')
+    contFrame +=1
+    if contFrame < 20 :
+        cap = cap0
+        ret, frame = cap.read()
+        print('camara 0')
+    else:
+        cap = cap1
+        ret, frame = cap.read()
+        print('camara 2')
+    if contFrame > 100:
+        contFrame = 0
 
-    ret, frame = cap.read()
 
     if ret:
     # detect vehicles
@@ -50,8 +63,8 @@ while ret:
                 # process license plate
                 license_plate_crop_gray = cv2.cvtColor(license_plate_crop, cv2.COLOR_BGR2GRAY)
                 _, license_plate_crop_thresh = cv2.threshold(license_plate_crop_gray, 80, 255, cv2.THRESH_BINARY_INV)
-                cv2.imshow('original', license_plate_crop)
-                cv2.imshow('threshold', license_plate_crop_thresh)
+                # cv2.imshow('original', license_plate_crop)
+                # cv2.imshow('threshold', license_plate_crop_thresh)
 
 
                 # read license plate
@@ -66,11 +79,11 @@ while ret:
                     print(Back.RESET)
     # cv2.waitKey(1000)
     #
-    # if cam == 0:
-    #     cam = 2
-    #
-    # else:
-    #     cam =0
+    if cam == 0:
+        cam = 2
+
+    else:
+        cam =0
 
 
 
