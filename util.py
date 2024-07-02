@@ -59,6 +59,19 @@ def write_csv(results, output_path):
 
 
 def license_complies_format(text):
+    """
+    To keep in mind:
+        Colombian car license plate has LLL NNN format. Whereas L stands for Letter and N for Number
+        Colombian motorcycles plates has LLL NNL
+
+    :param text:
+    :return:
+    """
+    """
+    
+    :param text: 
+    :return: 
+    """
 
     """
     Check if the license plate text complies with the required format.
@@ -72,25 +85,26 @@ def license_complies_format(text):
     if len(text) != 6:
 
         return False
-
+    # car license format check
     if (text[0] in string.ascii_uppercase or text[0] in dict_int_to_char.keys()) and \
        (text[1] in string.ascii_uppercase or text[1] in dict_int_to_char.keys()) and \
        (text[2] in string.ascii_uppercase or text[2] in dict_int_to_char.keys()) and \
        (text[3] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[3] in dict_char_to_int.keys()) and \
        (text[4] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[4] in dict_char_to_int.keys()) and \
        (text[5] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[5] in dict_char_to_int.keys()):
-       #(text[6] in string.ascii_uppercase or text[6] in dict_int_to_char.keys()):
+
         return True
+    # motorcycle license format check
     elif(text[0] in string.ascii_uppercase or text[0] in dict_int_to_char.keys()) and \
        (text[1] in string.ascii_uppercase or text[1] in dict_int_to_char.keys()) and \
        (text[2] in string.ascii_uppercase or text[2] in dict_int_to_char.keys()) and \
        (text[3] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[3] in dict_char_to_int.keys()) and \
        (text[4] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[4] in dict_char_to_int.keys()) and \
        (text[5] in string.ascii_uppercase or text[5] in dict_int_to_char.keys()) :
-       #(text[6] in string.ascii_uppercase or text[6] in dict_int_to_char.keys()):
+
         return True
     else:
-        print(f'Imagen detectada no tiene formato para Colombia {text}')
+        print(f'Image detected had no colombian valid license format {text}')
         return False
 
 
